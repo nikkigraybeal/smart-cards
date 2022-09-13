@@ -13,6 +13,16 @@
     <button class="search-button" type="button">search</button>
 
     <div class="card-container">
+
+      <div class="set-card card">
+        <h2><%= set1.subcategory %></h2>
+        <h3><%= set1.title %></h3>
+        <h3>Author: <%= set1.author %></h3>
+        <p>There are <%= set1.cards.length %> cards in this set.</p>
+
+        <button class="study-button" type="button">study</button>
+      </div>
+      
       <% set1.cards.map(card => { %>
         <div class="card-front card">
     
@@ -58,15 +68,19 @@
 
   <script>
 
+    const setCard = document.querySelector('.set-card')
+    const studyButton = document.querySelector('.study-button')
     const checkAnswerButton = document.querySelectorAll('.check-answer')   
     const nextCardButton = document.querySelectorAll('.next-card') 
     const cardBacks = document.querySelectorAll('.card-back')
     const cardFronts = document.querySelectorAll('.card-front')
-
     let index = 0
 
-    cardFronts[index].style.zIndex = "1"
-    cardBacks[index].style.zIndex = "1"
+    studyButton.addEventListener('click', () => {
+      setCard.style.zIndex = "0"
+      cardFronts[index].style.zIndex = "1"
+      cardBacks[index].style.zIndex = "1"
+    })
 
     checkAnswerButton.forEach(button => {
       button.addEventListener('click', () => {
