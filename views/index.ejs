@@ -12,9 +12,99 @@
     <input type="text" id="search" name="search">
     <button class="search-button" type="button">search</button>
 
+    <div class="card-container">
+      <% set1.cards.map(card => { %>
+        <div class="card-front card">
+    
+          <h2>Question:</h2>
+          <p><%= card.question %></p>
+          <button class="check-answer" type="button">check answer</button>
+        
+        </div>
+    
+        <div class="card-back card hide">
+    
+          <h2>Answer:</h2>
+          <p><%= card.answer %></p>
+          <h3>More Information:</h3>
+          <% card.links.map(link => { %>
+            <a href=`${link}`><%= link %></a><br>
+          <% }) %>
+    
+          <h4>How hard was this question to answer?</h4>
+          
+          <div class="radio-btns-container">
+  
+            <label for="easy"><input type="radio" id="easy" name="effort" value="easy">easy - 100% correct</label>
+          
+            <label for="medium-easy"><input type="radio" id="medium-easy" name="effort" value="medium-easy">medium-easy - mostly correct</label>
+            
+            <label for="medium-hard"><input type="radio" id="medium-hard" name="effort" value="medium-hard">medium-hard - mostly incorrect</label>
+            
+            <label for="hard"><input type="radio" id="hard" name="effort" value="hard">hard - 100% incorrect</label>
+  
+          </div>
+          
+  
+          <button class="next-card" type="button">next card</button>
+        
+        </div>
+     <% }) %>
+    </div>
+
   </main>
 
   <%- include('./partials/footer.ejs') %>
+
+  <script>
+
+    const checkAnswerButton = document.querySelectorAll('.check-answer')   
+    const nextCardButton = document.querySelectorAll('.next-card') 
+    const cardBacks = document.querySelectorAll('.card-back')
+    const cardFronts = document.querySelectorAll('.card-front')
+
+    let index = 0
+
+    cardFronts[index].style.zIndex = "1"
+    cardBacks[index].style.zIndex = "1"
+
+    checkAnswerButton.forEach(button => {
+      button.addEventListener('click', () => {
+        cardBacks.forEach(cardBack => {
+          cardBack.classList.remove('hide')
+        })
+        cardFronts.forEach(cardFront => {
+          cardFront.classList.add('hide')
+        })
+      })
+    })
+
+    nextCardButton.forEach(button => {
+      button.addEventListener('click', () => {
+        cardBacks.forEach(cardBack => {
+          cardBack.classList.add('hide')
+        })
+        cardFronts.forEach(cardFront => {
+          cardFront.classList.remove('hide')
+        }) 
+
+       if (index === cardFronts.length - 1) {
+        cardFronts[index].style.zIndex = "0"
+        cardBacks[index].style.zIndex = "0"
+        index = 0
+        cardFronts[index].style.zIndex = "1"
+        cardBacks[index].style.zIndex = "1"
+       } else {
+        cardFronts[index].style.zIndex = "0"
+        cardBacks[index].style.zIndex = "0"
+        index += 1
+        cardFronts[index].style.zIndex = "1"
+        cardBacks[index].style.zIndex = "1"
+       }
+      })     
+    })
+
+  </script>
 
 </body>
 </html>

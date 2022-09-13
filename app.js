@@ -4,6 +4,38 @@ const mongoose = require('mongoose')
 const { result } = require('lodash')
 const { render } = require('ejs')
 
+const card1 = {
+  id: 1,
+  question: 'q1',
+  answer: 'a1',
+  links: ['www.google.com', 'www.wikipedia.com'],
+  effort: 'hard',
+  lastSeen: new Date()
+}
+const card2 = {
+  id: 2,
+  question: 'q2',
+  answer: 'a2',
+  links: ['www.google.com', 'www.wikipedia.com'],
+  effort: 'hard',
+  lastSeen: new Date()
+}
+const card3 = {
+  id: 3,
+  question: 'q3',
+  answer: 'a3',
+  links: ['www.google.com', 'www.wikipedia.com'],
+  effort: 'hard',
+  lastSeen: new Date()
+}
+const set1 = {
+  subject: 'science',
+  subcategory: 'biology',
+  title: 'myosis',
+  author: 'user1',
+  public: true,
+  cards: [card1, card2, card3]
+}
 
 // express app
 const app = express()
@@ -20,7 +52,7 @@ app.use(morgan('dev'))
 
 // routes
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Home' })
+  res.render('index', { title: 'Home', set1 })
 })
 
 app.get('/login-signup', (req, res) => {

@@ -63,3 +63,35 @@ button{
   margin-top: 20px;
   font-size: 1em;
 }
+.card {
+  right: 0;
+  left: 0;
+  margin: 15px auto 15px;
+  width: 500px;
+  background: #fff;
+  padding: 10px 40px 10px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+.card-back h4{
+  margin-bottom: 0;
+}
+.card-back label{
+  display: block;
+  font-size: .65em;
+  
+}
+.card-back button{
+  display: block;
+  margin: 20px auto 0;
+}
+.card-container {
+  display: grid;
+}
+.card-container > * {
+  grid-area: 1/1;
+}
+.hide{
+  display: none;
+}
