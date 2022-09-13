@@ -15,52 +15,40 @@
     <div class="card-container">
 
       <div class="set-card card">
-        <h2><%= set1.subcategory %></h2>
+        <h1><%= set1.subcategory %></h1>
         <h3><%= set1.title %></h3>
         <h3>Author: <%= set1.author %></h3>
         <p>There are <%= set1.cards.length %> cards in this set.</p>
-
-        <button class="study-button" type="button">study</button>
       </div>
       
       <% set1.cards.map(card => { %>
         <div class="card-front card">
-    
-          <h2>Question:</h2>
-          <p><%= card.question %></p>
-          <button class="check-answer" type="button">check answer</button>
+
+          <h3><%= card.question %></h3>
         
         </div>
     
         <div class="card-back card hide">
     
-          <h2>Answer:</h2>
-          <p><%= card.answer %></p>
+          <h3><%= card.answer %></h3>
           <h3>More Information:</h3>
           <% card.links.map(link => { %>
             <a href=`${link}`><%= link %></a><br>
           <% }) %>
-    
-          <h4>How hard was this question to answer?</h4>
-          
-          <div class="radio-btns-container">
+
+          <div class="feedback-container">
   
-            <label for="easy"><input type="radio" id="easy" name="effort" value="easy">easy - 100% correct</label>
-          
-            <label for="medium-easy"><input type="radio" id="medium-easy" name="effort" value="medium-easy">medium-easy - mostly correct</label>
-            
-            <label for="medium-hard"><input type="radio" id="medium-hard" name="effort" value="medium-hard">medium-hard - mostly incorrect</label>
-            
-            <label for="hard"><input type="radio" id="hard" name="effort" value="hard">hard - 100% incorrect</label>
+            <div class="correct">Nailed it!</div>
+            <div class="incorrect">Blew it!</div>
   
           </div>
-          
-  
-          <button class="next-card" type="button">next card</button>
-        
+
         </div>
      <% }) %>
     </div>
+
+    <button class="flip hide" type="button">flip</button>
+    <button class="go-next-button" type="button">Go!</button>
 
   </main>
 
@@ -69,32 +57,20 @@
   <script>
 
     const setCard = document.querySelector('.set-card')
-    const studyButton = document.querySelector('.study-button')
-    const checkAnswerButton = document.querySelectorAll('.check-answer')   
-    const nextCardButton = document.querySelectorAll('.next-card') 
+    const goNextButton = document.querySelector('.go-next-button')
+    const flip = document.querySelector('.flip')   
     const cardBacks = document.querySelectorAll('.card-back')
     const cardFronts = document.querySelectorAll('.card-front')
     let index = 0
 
-    studyButton.addEventListener('click', () => {
-      setCard.style.zIndex = "0"
-      cardFronts[index].style.zIndex = "1"
-      cardBacks[index].style.zIndex = "1"
-    })
-
-    checkAnswerButton.forEach(button => {
-      button.addEventListener('click', () => {
-        cardBacks.forEach(cardBack => {
-          cardBack.classList.remove('hide')
-        })
-        cardFronts.forEach(cardFront => {
-          cardFront.classList.add('hide')
-        })
-      })
-    })
-
-    nextCardButton.forEach(button => {
-      button.addEventListener('click', () => {
+    goNextButton.addEventListener('click', () => {
+      if (goNextButton.innerText === "Go!") {
+        setCard.style.zIndex = "0"
+        cardFronts[index].style.zIndex = "1"
+        cardBacks[index].style.zIndex = "1"
+        goNextButton.innerText = "Next"
+        flip.classList.remove('hide')
+      } else {
         cardBacks.forEach(cardBack => {
           cardBack.classList.add('hide')
         })
@@ -115,8 +91,18 @@
         cardFronts[index].style.zIndex = "1"
         cardBacks[index].style.zIndex = "1"
        }
-      })     
+      }
+      
     })
+
+      flip.addEventListener('click', () => {
+        cardBacks.forEach(cardBack => {
+          cardBack.classList.remove('hide')
+        })
+        cardFronts.forEach(cardFront => {
+          cardFront.classList.add('hide')
+        })
+      })
 
   </script>
 

@@ -6,24 +6,24 @@ const { render } = require('ejs')
 
 const card1 = {
   id: 1,
-  question: 'q1',
-  answer: 'a1',
+  question: 'Define Meiosis and make this a super long question with lots of parts so it takes up tons of space. The longer the better so I can make sure the container expands to fit the content.',
+  answer: 'The stage following meiosis II that involves the physical separation of four haploid gametes that are genetically different.',
   links: ['www.google.com', 'www.wikipedia.com'],
   effort: 'hard',
   lastSeen: new Date()
 }
 const card2 = {
   id: 2,
-  question: 'q2',
-  answer: 'a2',
+  question: 'Define Metaphase I',
+  answer: 'The stage of meiosis I in which homologous chromosomes in tetrads are aligned in the middle of the cell along the metaphase plate.',
   links: ['www.google.com', 'www.wikipedia.com'],
   effort: 'hard',
   lastSeen: new Date()
 }
 const card3 = {
   id: 3,
-  question: 'q3',
-  answer: 'a3',
+  question: 'Define Prophase I',
+  answer: 'The stage of meiosis I in which the DNA condenses, centrosomes move to the poles, and homologous chromosomes organize into tetrads and undergo crossing-over.',
   links: ['www.google.com', 'www.wikipedia.com'],
   effort: 'hard',
   lastSeen: new Date()
@@ -31,7 +31,7 @@ const card3 = {
 const set1 = {
   subject: 'science',
   subcategory: 'biology',
-  title: 'myosis',
+  title: 'meiosis',
   author: 'user1',
   public: true,
   cards: [card1, card2, card3]

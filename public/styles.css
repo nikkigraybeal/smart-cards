@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
 
-
 body{
   max-width: 1200px;
   margin: 20px auto;
@@ -33,35 +32,25 @@ nav li{
   list-style-type: none;
   margin-left: 20px;
 }
-
 nav p, nav a{
   color: #777;
   font-weight: 300;
 }
-h2{
-  text-align: left;
-  top: 0;
-  left: 0;
-}
-footer{
-  color: #777;
-  text-align: center;
-  margin: 10px auto;
-}
-h1{
+header h1{
   text-align: center;
   font-size: 3em;
-}
-h2, h3, h4{
-  text-align: left;
 }
 input{
   border-radius: 4px;
   margin: 10px 5px;
 }
 button{
-  margin-top: 20px;
   font-size: 1em;
+}
+footer{
+  color: #777;
+  text-align: center;
+  margin: 10px auto;
 }
 .card {
   right: 0;
@@ -69,22 +58,10 @@ button{
   margin: 15px auto 15px;
   width: 500px;
   background: #fff;
-  padding: 10px 40px 10px;
+  padding: 40px;
   box-sizing: border-box;
   border: 1px solid black;
   border-radius: 8px;
-}
-.card-back h4{
-  margin-bottom: 0;
-}
-.card-back label{
-  display: block;
-  font-size: .65em;
-  
-}
-.card-back button{
-  display: block;
-  margin: 20px auto 0;
 }
 .card-container {
   display: grid;
@@ -95,9 +72,19 @@ button{
 .set-card{
   z-index: 1;
 }
-.set-card h2, .set-card h3{
+.feedback-container{
+  display: flex;
   text-align: center;
-  margin: 20px;
+  justify-content: center;
+  width: 500px;
+  position: relative;
+  right: 42px;
+}
+.correct{
+  width: 250px;
+}
+.incorrect{
+  width: 250px;
 }
 .hide{
   display: none;
