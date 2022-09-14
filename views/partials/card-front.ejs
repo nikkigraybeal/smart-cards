@@ -1,6 +1,5 @@
-<div class="card-front">
-
-  <h2>Question:</h2>
-  <p><%= card1.question %></p>
-
-</div>
+<% set1.cards.map(card => { %> 
+  <div class="card-front card">
+      <h3><%= card.question %></h3> 
+  </div>
+<% }) %>

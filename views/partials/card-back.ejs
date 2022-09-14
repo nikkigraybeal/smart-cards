@@ -1,15 +1,17 @@
-<div class="card-back">
-
-  <h2>Answer:</h2>
-  <p><%= card.answer %></p>
-  <br>
-  <h2>More Info:</h2>
-  <p><%= card.links %></p>
-
-  <label for="effort">How hard was this question to answer?</label>
-  <input type="radio" name="effort" value="easy - 100% correct">
-  <input type="radio" name="effort" value="medium-easy - mostly correct">
-  <input type="radio" name="effort" value="medium-hard - mostly incorrect">
-  <input type="radio" name="effort" value="hard - 100% incorrect">
-  <button type="submit">Submit</button>
-</div>
+<% set1.cards.map(card => { %> 
+  <div class="card-back card hide">
+      <h3><%= card.answer %></h3>
+    
+      <div class="links-container">
+        <h3>More Information:</h3>
+        <% card.links.map(link => { %>
+          <a href=`${link}`><%= link %></a><br>
+        <% }) %>
+      </div>  
+    
+      <div class="feedback-container">
+        <div class="correct">Nailed it!</div>
+        <div class="incorrect">Blew it!</div>
+      </div>
+  </div>
+<% }) %>

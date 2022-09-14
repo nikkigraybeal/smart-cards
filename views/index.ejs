@@ -14,40 +14,13 @@
 
     <div class="card-container">
 
-      <div class="set-card card">
-        <h1><%= set1.subcategory %></h1>
-        <h3><%= set1.title %></h3>
-        <h3>Author: <%= set1.author %></h3>
-        <p>There are <%= set1.cards.length %> cards in this set.</p>
-      </div>
-      
-      <% set1.cards.map(card => { %>
-        <div class="card-front card">
-
-          <h3><%= card.question %></h3>
-        
-        </div>
+      <%- include('./partials/set-card.ejs') %>
+      <%- include('./partials/card-front.ejs') %>   
+      <%- include('./partials/card-back.ejs') %>
     
-        <div class="card-back card hide">
-    
-          <h3><%= card.answer %></h3>
-          <h3>More Information:</h3>
-          <% card.links.map(link => { %>
-            <a href=`${link}`><%= link %></a><br>
-          <% }) %>
-
-          <div class="feedback-container">
-  
-            <div class="correct">Nailed it!</div>
-            <div class="incorrect">Blew it!</div>
-  
-          </div>
-
-        </div>
-     <% }) %>
     </div>
 
-    <button class="flip hide" type="button">flip</button>
+    <button class="flip hide" type="button">Flip</button>
     <button class="go-next-button" type="button">Go!</button>
 
   </main>
