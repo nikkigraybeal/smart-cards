@@ -40,6 +40,9 @@ const set1 = {
 // express app
 const app = express()
 
+// connect to MongoDB
+const dbURI = "mongodb+srv://nikkig:MQ84Dt5jqzKc9U2@smart-cards.kakvmvn.mongodb.net/smart-cards?retryWrites=true&w=majority"
+
 //listen for requests
 app.listen(3000)
 
