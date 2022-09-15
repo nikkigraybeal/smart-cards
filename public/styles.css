@@ -41,11 +41,21 @@ header h1{
   font-size: 3em;
 }
 input{
+  border: 1px solid #777;
   border-radius: 4px;
-  margin: 10px 5px;
+  margin: 10px 0;
+  padding: 8px;
+  
 }
 button{
+  margin-top: 20px;
+  background: rgb(161, 161, 164);
+  color: white;
+  padding: 8px;
+  border: 0;
+  border-radius: 4px;
   font-size: 1em;
+  cursor: pointer;
 }
 footer{
   color: #777;
@@ -95,6 +105,49 @@ footer{
 .correct:hover, .incorrect:hover{
   cursor: pointer;
   color: indigo;
+}
+.create-set-container form{
+  max-width: 400px;
+  margin: 0 auto;
+}
+.create-set-container input{
+  display: block;
+  width: 100%;
+}
+.create-set-container label{
+  display: block;
+  margin-top: 24px;
+}
+.public-label{
+  position: relative;
+  left: 25px;
+  bottom: 22px;
+}
+#public{
+  position: relative;
+  right: 190px;
+  top: 20px;
+}
+.set-info{
+  max-width: 400px;
+  margin: 0 auto;
+}
+.add-link-button{
+  margin: -5px auto 5px;
+}
+.added-links{
+  border: 1px solid black;
+  border-radius: 4px;
+  height: 75px;
+  overflow: scroll;
+}
+.added-links p{
+  font-size: .75em;
+  margin-top: 5px;
+  color: gray;
+}
+.added-links a{
+  
 }
 .hide{
   display: none;

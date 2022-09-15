@@ -1,0 +1,119 @@
+<html lang="en">
+
+<%- include('./partials/head.ejs') %>
+
+<body>
+  <%- include('./partials/header.ejs') %>
+  <%- include('./partials/nav.ejs') %>
+
+  <div class="create-set-container">
+
+    <div class="set-info">
+
+    </div>
+
+    <form action="/create-set" method="POST">
+      <div class="set-input">
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject" required>
+        <label for="subcategory">Subcategory:</label>
+        <input type="text" id="subcategory" name="subcategory" required>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        
+        <input type="checkbox" id="public"/>
+        <label class="public-label" for="public">Make Set Public</label>
+        
+        <button class="save-set-button" type="button">Save</button>
+      </div>
+      
+      <div class="card-input">
+        <label for="question">Question:</label>
+        <input type="text" id="question" name="question" required>
+  
+        <label for="answer">Answer:</label>
+        <input type="text" id="answer" name="answer" required>
+  
+        <label for="link">Add Link:</label>
+        <input type="text" id="link" name="link">
+        <button class="add-link-button" type="button">Add Link</button>
+        <div class="added-links">
+          <p>Added links will appear here.</p>
+        </div>
+  
+        <button>Save Card</button>
+      </div>
+    </form>
+
+  </div>
+
+  <%- include('./partials/footer.ejs') %>
+
+  <script>
+
+    // HIDE SET INFO, DISPLAY IN DIV ON "SAVE"
+    // elements
+    const saveSetButton = document.querySelector('.save-set-button')
+    const setInput = document.querySelector('.set-input')
+    const setInfo = document.querySelector('.set-info')
+    const subject = document.getElementById('subject')
+    const subcategory = document.getElementById('subcategory')
+    const title = document.getElementById('title')
+    const public = document.getElementById('public')
+    
+    const setInputs = [ subject, subcategory, title ]
+    let html = ''
+
+    // save set info display values on keyup events
+    setInputs.forEach(input => {
+      input.addEventListener('keyup', () => {
+        html = `
+          <h3>Subject: ${subject.value}</h3>
+          <h3>Subcategory: ${subcategory.value}</h3>
+          <h3>Title: ${title.value}</h3>
+        `
+      })
+    })
+
+    // display set info on "save"
+    saveSetButton.addEventListener('click', () => {
+      html += `<h3>Public: ${public.checked}</h3>`
+      setInfo.innerHTML = html
+      setInput.classList.add('hide')
+    })
+
+    // ADD LINKS TO LINK DISPLAY DIV ON "ADD"
+    //elements
+    const link = document.getElementById('link')
+    const addLinkButton = document.querySelector('.add-link-button')
+    const addedLinksDiv = document.querySelector('.added-links')
+
+    const validateLink = (link) => {
+    index = link.search("https://")
+    if (index === -1) {
+      return `https://${link}`
+    } 
+    return link
+  }
+
+    addLinkButton.addEventListener('click', () => {
+      if (addedLinksDiv.innerText === "Added links will appear here.") {
+        addedLinksDiv.innerText = ''
+      }
+      let ValidatedLink = validateLink(link.value)
+      addedLinksDiv.innerHTML += `
+      <a href=${ValidatedLink}>${ValidatedLink}</a><span class="material-symbols-outlined link-trash">delete</span><br>`
+      link.value = ''
+
+      // add listener to trashcans
+      const trashcan = document.querySelectorAll('.link-trash')
+      trashcan.forEach(can => {
+        can.addEventListener('click', () => {
+          can.previousSibling.remove()
+          can.remove()
+        })
+      })
+    })
+  </script>
+</body>
+</html>

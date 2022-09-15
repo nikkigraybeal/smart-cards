@@ -62,12 +62,8 @@ app.get('/login-signup', (req, res) => {
   res.render('login-signup', { title: 'Login or Signup' })
 })
 
-app.get('/create-set', (req, res) => {
-  res.render('create-set', { title: 'Create New Set' })
-})
-
-app.get('/create-card', (req, res) => {
-  res.render('create-card', { title: 'Create Cards' })
+app.get('/create', (req, res) => {
+  res.render('create', { title: 'Create New Set' })
 })
 
 app.get('/about', (req, res) => {
