@@ -33,7 +33,6 @@ app.get('/', (req, res) => {
   Card.find()
     .then(result => {
       res.render('index', { title: 'Home', result })
-      
     })
     .catch(err => {
       console.log(err)
@@ -45,7 +44,8 @@ app.get('/login-signup', (req, res) => {
 })
 
 app.get('/create', (req, res) => {
-  res.render('create', { title: 'Create New Set' })
+  const setInfo = []
+  res.render('create', { title: 'Create New Set', setInfo })
 })
 
 app.post('/create', (req, res) => {
@@ -53,7 +53,8 @@ app.post('/create', (req, res) => {
 
   card.save()
     .then(result => {
-      
+      console.log(result, result.length)
+      res.render('create', { title: 'Create New Cards', setInfo: result })
     })
     .catch(err => {
       console.log(err)

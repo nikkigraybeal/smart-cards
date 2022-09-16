@@ -9,7 +9,17 @@
   <div class="create-set-container">
 
     <div class="set-info">
-
+      <% if (!Array.isArray(setInfo)) { %>
+        <h3>Subject: <%= setInfo.subject %></h3>
+        <h3>Subcategory: <%= setInfo.subcategory %></h3>
+        <h3>Title: <%= setInfo.title %></h3>
+        <% if (setInfo.public) { %>
+          <h3>Public: true</h3>
+        <% } else { %>
+          <% console.log(setInfo) %>
+          <h3>Public: false</h3>
+        <% } %>
+      <% } %>
     </div>
 
     <form action="/create" method="POST">
@@ -68,6 +78,11 @@
     
     const setInputs = [ subject, subcategory, title ]
     let html = ''
+
+    // hide setInput if setInfo has children
+    if (setInfo.children.length > 0) {
+      setInput.classList.add('hide')
+    }
 
     // save set info display values on keyup events
     setInputs.forEach(input => {
