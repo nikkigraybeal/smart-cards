@@ -1,10 +1,10 @@
-<% set1.cards.map(card => { %> 
+<% result.map(card => { %> 
   <div class="card-back card hide">
       <h3><%= card.answer %></h3>
     
       <div class="links-container">
         <h3>More Information:</h3>
-        <% card.links.map(link => { %>
+        <% card.links.split(',').map(link => { %>
           <a href=`${link}`><%= link %></a><br>
         <% }) %>
       </div>  

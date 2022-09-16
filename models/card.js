@@ -20,8 +20,8 @@ const cardSchema = new Schema({
     required: true
   },
   public: {
-    type: Boolean,
-    required: true
+    type: String,
+    required: false
   },
   question: {
     type: String,
@@ -29,7 +29,7 @@ const cardSchema = new Schema({
   },
   links: {
     type: String,
-    equired: false
+    required: false
     },
   answer: {
     type: String,

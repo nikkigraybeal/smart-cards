@@ -3,39 +3,8 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 const { result } = require('lodash')
 const { render } = require('ejs')
+const Card = require('./models/card')
 
-const card1 = {
-  id: 1,
-  question: 'Define Meiosis and make this a super long question with lots of parts so it takes up tons of space. The longer the better so I can make sure the container expands to fit the content.',
-  answer: 'The stage following meiosis II that involves the physical separation of four haploid gametes that are genetically different.',
-  links: ['www.google.com', 'www.wikipedia.com'],
-  effort: 'hard',
-  lastSeen: new Date()
-}
-const card2 = {
-  id: 2,
-  question: 'Define Metaphase I',
-  answer: 'The stage of meiosis I in which homologous chromosomes in tetrads are aligned in the middle of the cell along the metaphase plate.',
-  links: ['www.google.com', 'www.wikipedia.com'],
-  effort: 'hard',
-  lastSeen: new Date()
-}
-const card3 = {
-  id: 3,
-  question: 'Define Prophase I',
-  answer: 'The stage of meiosis I in which the DNA condenses, centrosomes move to the poles, and homologous chromosomes organize into tetrads and undergo crossing-over.',
-  links: ['www.google.com', 'www.wikipedia.com'],
-  effort: 'hard',
-  lastSeen: new Date()
-}
-const set1 = {
-  subject: 'science',
-  subcategory: 'biology',
-  title: 'meiosis',
-  author: 'user1',
-  public: true,
-  cards: [card1, card2, card3]
-}
 
 // express app
 const app = express()
@@ -43,19 +12,32 @@ const app = express()
 // connect to MongoDB
 const dbURI = "mongodb+srv://nikkig:MQ84Dt5jqzKc9U2@smart-cards.kakvmvn.mongodb.net/smart-cards?retryWrites=true&w=majority"
 
-//listen for requests
-app.listen(3000)
+mongoose.connect(dbURI)
+  .then(result => {
+    app.listen(3000) //listen for requests
+  })
+  .catch(err => {
+    console.log(err)
+  })
 
 //register view engine
 app.set('view engine', 'ejs')
 
 // middleware and static files
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
 // routes
 app.get('/', (req, res) => {
-  res.render('index', { title: 'Home', set1 })
+  Card.find()
+    .then(result => {
+      res.render('index', { title: 'Home', result })
+      
+    })
+    .catch(err => {
+      console.log(err)
+    }) 
 })
 
 app.get('/login-signup', (req, res) => {
@@ -64,6 +46,18 @@ app.get('/login-signup', (req, res) => {
 
 app.get('/create', (req, res) => {
   res.render('create', { title: 'Create New Set' })
+})
+
+app.post('/create', (req, res) => {
+  const card = new Card(req.body)
+
+  card.save()
+    .then(result => {
+      
+    })
+    .catch(err => {
+      console.log(err)
+    })
 })
 
 app.get('/about', (req, res) => {

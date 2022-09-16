@@ -12,7 +12,7 @@
 
     </div>
 
-    <form action="/create-set" method="POST">
+    <form action="/create" method="POST">
       <div class="set-input">
         <label for="subject">Subject:</label>
         <input type="text" id="subject" name="subject" required>
@@ -21,7 +21,7 @@
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" required>
         
-        <input type="checkbox" id="public"/>
+        <input type="checkbox" id="public" name="public"/>
         <label class="public-label" for="public">Make Set Public</label>
         
         <button class="save-set-button" type="button">Save</button>
@@ -35,13 +35,18 @@
         <input type="text" id="answer" name="answer" required>
   
         <label for="link">Add Link:</label>
-        <input type="text" id="link" name="link">
+        <input type="text" id="link">
         <button class="add-link-button" type="button">Add Link</button>
         <div class="added-links">
           <p>Added links will appear here.</p>
         </div>
-  
-        <button>Save Card</button>
+
+        <div class="hide">
+          <input type="text" name="author" value="user1">user1</input>
+          <input class="hidden-links-input" name="links"></input>
+        </div>
+        
+        <button class="save-card-button">Save Card</button>
       </div>
     </form>
 
@@ -87,6 +92,8 @@
     const link = document.getElementById('link')
     const addLinkButton = document.querySelector('.add-link-button')
     const addedLinksDiv = document.querySelector('.added-links')
+    const hiddenLinksInput = document.querySelector('.hidden-links-input')
+    const saveCardButton = document.querySelector('.save-card-button')
 
     const validateLink = (link) => {
     index = link.search("https://")
@@ -96,21 +103,32 @@
     return link
   }
 
+  const updateLinksInput = () => {
+    const links = document.querySelectorAll('.added-links a')
+    hiddenLinksInput.value = ''
+    links.forEach(link => {
+      hiddenLinksInput.value += `${link.innerText},`
+    })
+  }
+
     addLinkButton.addEventListener('click', () => {
       if (addedLinksDiv.innerText === "Added links will appear here.") {
         addedLinksDiv.innerText = ''
       }
+
       let ValidatedLink = validateLink(link.value)
       addedLinksDiv.innerHTML += `
       <a href=${ValidatedLink}>${ValidatedLink}</a><span class="material-symbols-outlined link-trash">delete</span><br>`
       link.value = ''
+      updateLinksInput()
 
       // add listener to trashcans
-      const trashcan = document.querySelectorAll('.link-trash')
-      trashcan.forEach(can => {
+      const trashcans = document.querySelectorAll('.link-trash')
+      trashcans.forEach(can => {
         can.addEventListener('click', () => {
           can.previousSibling.remove()
           can.remove()
+          updateLinksInput()
         })
       })
     })
