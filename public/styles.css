@@ -135,6 +135,10 @@ footer{
 .add-link-button{
   margin: -5px auto 5px;
 }
+.links-container a:hover{
+  cursor: pointer;
+  color: blue;
+}
 .added-links{
   border: 1px solid black;
   border-radius: 4px;

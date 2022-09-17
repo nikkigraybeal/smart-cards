@@ -10,14 +10,13 @@
 
     <div class="set-info">
       <% if (!Array.isArray(setInfo)) { %>
-        <h3>Subject: <%= setInfo.subject %></h3>
-        <h3>Subcategory: <%= setInfo.subcategory %></h3>
-        <h3>Title: <%= setInfo.title %></h3>
+        <h3>Subject: <span class="set-info-subject"><%= setInfo.subject %></span></h3>
+        <h3>Subcategory: <span class="set-info-subcategory"><%= setInfo.subcategory %></span></h3>
+        <h3>Title: <span class="set-info-title"><%= setInfo.title %></span></h3>
         <% if (setInfo.public) { %>
-          <h3>Public: true</h3>
+          <h3>Public: <span class="set-info-public">true</span></h3>
         <% } else { %>
-          <% console.log(setInfo) %>
-          <h3>Public: false</h3>
+          <h3>Public: <span class="set-info-public">false</span></h3>
         <% } %>
       <% } %>
     </div>
@@ -81,7 +80,19 @@
 
     // hide setInput if setInfo has children
     if (setInfo.children.length > 0) {
+      // elements
+      const setInfoSubject = document.querySelector('.set-info-subject')
+      const setInfoSubcategory = document.querySelector('.set-info-subcategory')
+      const setInfoTitle = document.querySelector('.set-info-title')
+      const setInfoPublic = document.querySelector('.set-info-public')
+
+      subject.value = setInfoSubject
+      subcategory.value = setInfoSubcategory
+      title.value = setInfoTitle
+      public.value = setInfoPublic
+
       setInput.classList.add('hide')
+      
     }
 
     // save set info display values on keyup events
@@ -111,9 +122,14 @@
     const saveCardButton = document.querySelector('.save-card-button')
 
     const validateLink = (link) => {
-    index = link.search("https://")
-    if (index === -1) {
+    const www = link.slice(0, 3).search("www")
+    if (www != -1) {
       return `https://${link}`
+    }
+    const https = link.search("https://www.")
+    const http = link.search("http://www.")
+    if (https === -1 && http === -1) {
+      return `https://www.${link}`
     } 
     return link
   }
@@ -122,7 +138,7 @@
     const links = document.querySelectorAll('.added-links a')
     hiddenLinksInput.value = ''
     links.forEach(link => {
-      hiddenLinksInput.value += `${link.innerText},`
+      hiddenLinksInput.value += `${link.href}, `
     })
   }
 
@@ -133,7 +149,7 @@
 
       let ValidatedLink = validateLink(link.value)
       addedLinksDiv.innerHTML += `
-      <a href=${ValidatedLink}>${ValidatedLink}</a><span class="material-symbols-outlined link-trash">delete</span><br>`
+      <a href=${ValidatedLink}>${ValidatedLink.slice(0, 27)}</a><span class="material-symbols-outlined link-trash">delete</span><br>`
       link.value = ''
       updateLinksInput()
 
