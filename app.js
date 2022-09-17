@@ -61,6 +61,16 @@ app.post('/create', (req, res) => {
     })
 })
 
+app.get('/details', (req, res) => {
+  Card.find()
+    .then(result => {
+      res.render('details', { title: 'Details', result })
+    })
+    .catch(err => {
+      console.log(err)
+    }) 
+})
+
 app.get('/about', (req, res) => {
   res.render('about', { title: 'About' })
 })

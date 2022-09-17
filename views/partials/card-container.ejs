@@ -1,0 +1,65 @@
+<div>
+
+  <div class="card-container">
+
+    <%- include('./set-card.ejs') %> 
+    <%- include('./card-front.ejs') %>   
+    <%- include('./card-back.ejs') %>
+  
+  </div>
+
+  <button class="flip hide" type="button">Flip</button>
+  <button class="go-next-button" type="button">Go!</button>
+
+</div>
+
+<script>
+
+  const setCard = document.querySelector('.set-card')
+  const goNextButton = document.querySelector('.go-next-button')
+  const flip = document.querySelector('.flip')   
+  const cardBacks = document.querySelectorAll('.card-back')
+  const cardFronts = document.querySelectorAll('.card-front')
+  let index = 0
+
+  goNextButton.addEventListener('click', () => {
+    if (goNextButton.innerText === "Go!") {
+      setCard.style.zIndex = "0"
+      cardFronts[index].style.zIndex = "1"
+      cardBacks[index].style.zIndex = "1"
+      goNextButton.innerText = "Next"
+      flip.classList.remove('hide')
+    } else {
+      cardBacks.forEach(cardBack => {
+        cardBack.classList.add('hide')
+      })
+      cardFronts.forEach(cardFront => {
+        cardFront.classList.remove('hide')
+      }) 
+
+     if (index === cardFronts.length - 1) {
+      cardFronts[index].style.zIndex = "0"
+      cardBacks[index].style.zIndex = "0"
+      index = 0
+      cardFronts[index].style.zIndex = "1"
+      cardBacks[index].style.zIndex = "1"
+     } else {
+      cardFronts[index].style.zIndex = "0"
+      cardBacks[index].style.zIndex = "0"
+      index += 1
+      cardFronts[index].style.zIndex = "1"
+      cardBacks[index].style.zIndex = "1"
+     }
+    }
+    
+  })
+
+    flip.addEventListener('click', () => {
+      cardBacks.forEach(cardBack => {
+        cardBack.classList.remove('hide')
+      })
+      cardFronts.forEach(cardFront => {
+        cardFront.classList.add('hide')
+      })
+    })
+</script>
