@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const { result } = require('lodash')
 const { render } = require('ejs')
 const Card = require('./models/card')
+const utils = require('./utils')
 
 
 // express app
@@ -32,7 +33,8 @@ app.use(morgan('dev'))
 app.get('/', (req, res) => {
   Card.find()
     .then(result => {
-      res.render('index', { title: 'Home', result })
+      subjects = utils.getSubjects(result)
+      res.render('index', { title: 'Home', subjects })
     })
     .catch(err => {
       console.log(err)
@@ -53,7 +55,6 @@ app.post('/create', (req, res) => {
 
   card.save()
     .then(result => {
-      console.log(result, result.length)
       res.render('create', { title: 'Create New Cards', setInfo: result })
     })
     .catch(err => {

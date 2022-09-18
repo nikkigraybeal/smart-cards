@@ -86,13 +86,12 @@
       const setInfoTitle = document.querySelector('.set-info-title')
       const setInfoPublic = document.querySelector('.set-info-public')
 
-      subject.value = setInfoSubject
-      subcategory.value = setInfoSubcategory
-      title.value = setInfoTitle
-      public.value = setInfoPublic
+      subject.value = setInfoSubject.innerText
+      subcategory.value = setInfoSubcategory.innerText
+      title.value = setInfoTitle.innerText
+      public.checked = setInfoPublic.innerText
 
       setInput.classList.add('hide')
-      
     }
 
     // save set info display values on keyup events

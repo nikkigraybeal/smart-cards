@@ -12,7 +12,14 @@
     <input type="text" id="search" name="search">
     <button class="search-button" type="button">search</button>
 
-    <%- include('./partials/card-container.ejs') %>
+    <div class="browse">
+
+      <p>Browse by Subject</p>
+      <% subjects.map(subject => { %>
+        <h3><%= subject %></h3>
+      <% }) %>
+
+    </div>
     
   </main>
 
