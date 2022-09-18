@@ -13,7 +13,7 @@
         <h3>Subject: <span class="set-info-subject"><%= setInfo.subject %></span></h3>
         <h3>Subcategory: <span class="set-info-subcategory"><%= setInfo.subcategory %></span></h3>
         <h3>Title: <span class="set-info-title"><%= setInfo.title %></span></h3>
-        <% if (setInfo.public) { %>
+        <% if (setInfo.public === "on") { %>
           <h3>Public: <span class="set-info-public">true</span></h3>
         <% } else { %>
           <h3>Public: <span class="set-info-public">false</span></h3>
@@ -89,8 +89,12 @@
       subject.value = setInfoSubject.innerText
       subcategory.value = setInfoSubcategory.innerText
       title.value = setInfoTitle.innerText
-      public.checked = setInfoPublic.innerText
 
+      if (setInfoPublic.innerText === "true" && public.checked === false ||
+          setInfoPublic.innerText === "false" && public.checked === true)  {
+        public.click()
+      }
+      
       setInput.classList.add('hide')
     }
 
