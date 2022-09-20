@@ -1,13 +1,30 @@
-const getSubjects = (cards) => {
-  const subjects = []
-      cards.forEach(card => {
-        if (!subjects.includes(card.subject)) {
-          subjects.push(card.subject)
-        }
-      })
-      return subjects
+const getSetInfo = (cards) => {
+  const setInfo = {}
+  cards.forEach(card => {
+    if (!(card.subject in setInfo)) {
+      setInfo[card.subject] = {}
+    }
+  })
+  //  {Science: {},
+  //   History: {}
+  //  }
+  cards.forEach(card => {
+    if (!(card.subcategory in setInfo[card.subject])) {
+      setInfo[card.subject][card.subcategory] = []
+    }
+  })
+  //  {Science: {biology: [], computer science: []},
+  //   History: {american rev: []
+  //  }
+  cards.forEach(card => {
+    if (!setInfo[card.subject][card.subcategory].includes(card.title)) {
+      setInfo[card.subject][card.subcategory].push(card.title)
+    }
+  })
+  console.log(setInfo)
+  return setInfo
 }
 
 module.exports = {
-  getSubjects
+  getSetInfo
 }

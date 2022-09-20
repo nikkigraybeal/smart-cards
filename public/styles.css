@@ -15,6 +15,9 @@ p, h1, h2, h3, a, ul{
   text-decoration: none;
   color: #222;
 }
+li{
+  list-style-type: none;
+}
 nav{
   display: flex;
   justify-content:space-between;
@@ -38,7 +41,7 @@ nav p, nav a{
 }
 header h1{
   text-align: center;
-  font-size: 3em;
+  font-size: 50px;
 }
 input{
   border: 1px solid #777;
@@ -54,7 +57,7 @@ button{
   padding: 8px;
   border: 0;
   border-radius: 4px;
-  font-size: 1em;
+  font-size: 16px;
   cursor: pointer;
 }
 footer{
@@ -62,9 +65,39 @@ footer{
   text-align: center;
   margin: 10px auto;
 }
-.browse h3:hover{
-  cursor: pointer;
+.browse{
+  max-width: 800;
+  margin: 30px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.browse h3{
+  font-size: 30px;
+  border-bottom: 1px solid black;
+}
+.browse h4{
+  margin: 12px auto 0;
+  font-size: 20px;
+}
+.browse a{
+  padding: 0;
+  margin: 0;
+}
+.browse a:hover{
   color: blue;
+  cursor: pointer;
+}
+.browse-subject{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  height: 200px;
+  border-radius: 4px;
+  padding: 15px;
+  overflow-y: auto;
+  border: 1px solid black;
 }
 .card-container {
   display: grid;
@@ -76,12 +109,11 @@ footer{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  right: 0;
-  left: 0;
   margin: 15px auto 15px;
-  padding: 20px 40px 0;
+  padding: 20px 40px 20px;
   width: 500px;
   height: 250px;
+  overflow-y: auto;
   background: #fff;
   box-sizing: border-box;
   border: 1px solid black;

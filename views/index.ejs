@@ -12,11 +12,20 @@
     <input type="text" id="search" name="search">
     <button class="search-button" type="button">search</button>
 
+    
     <div class="browse">
-
-      <p>Browse by Subject</p>
-      <% subjects.map(subject => { %>
-        <h3><%= subject %></h3>
+      <% Object.entries(setInfo).map(([subject, subcatsObj]) => { %>
+        <div class="browse-subject">
+          <h3><%= subject %></h3>
+          <div class="browse-subcategory">
+            <% Object.entries(subcatsObj).map(([subcat, titleArr]) => { %>
+              <h4><%= subcat %></h4>
+              <% titleArr.map(title => { %>
+                <a href="/<%= subcat %>/<%= title %>"><%= title %></a>
+              <% }) %>
+            <% }) %>
+            </div>
+        </div>
       <% }) %>
 
     </div>
@@ -24,6 +33,12 @@
   </main>
 
   <%- include('./partials/footer.ejs') %>
+
+  <script>
+
+    
+
+  </script>
 
 </body>
 </html>

@@ -33,8 +33,20 @@ app.use(morgan('dev'))
 app.get('/', (req, res) => {
   Card.find()
     .then(result => {
-      subjects = utils.getSubjects(result)
-      res.render('index', { title: 'Home', subjects })
+      setInfo = utils.getSetInfo(result)
+      res.render('index', { title: 'Home', setInfo })
+    })
+    .catch(err => {
+      console.log(err)
+    }) 
+})
+
+app.get('/:subcategory/:title', (req, res) => {
+  const subcategory = req.params.subcategory
+  const title = req.params.title
+  Card.find({ subcategory, title })
+    .then(result => {
+      res.render('details', { title: 'Details', result })
     })
     .catch(err => {
       console.log(err)
@@ -60,16 +72,6 @@ app.post('/create', (req, res) => {
     .catch(err => {
       console.log(err)
     })
-})
-
-app.get('/details', (req, res) => {
-  Card.find()
-    .then(result => {
-      res.render('details', { title: 'Details', result })
-    })
-    .catch(err => {
-      console.log(err)
-    }) 
 })
 
 app.get('/about', (req, res) => {
