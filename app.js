@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
 app.get('/:subcategory/:title', (req, res) => {
   const subcategory = req.params.subcategory
   const title = req.params.title
+  
   Card.find({ subcategory, title })
     .then(result => {
       res.render('details', { title: 'Details', result })
@@ -52,6 +53,7 @@ app.get('/:subcategory/:title', (req, res) => {
       console.log(err)
     }) 
 })
+
 
 app.get('/login-signup', (req, res) => {
   res.render('login-signup', { title: 'Login or Signup' })

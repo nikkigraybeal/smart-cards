@@ -6,11 +6,45 @@
   <%- include('./partials/header.ejs') %>
   <%- include('./partials/nav.ejs') %>
 <main>
-
+  <!-- result has cards from a specific subcategory and title -->
+  <button class="add-cards" onclick="addCards()">Add Cards</button>
+  <button class="edit-set" onclick="editSet()">Edit Set Info</button>
+  <button class="delete-set" onclick="deleteSet()">Delete Set</button>
+  
   <%- include('./partials/card-container.ejs') %>
 
 </main>
   
   <%- include('./partials/footer.ejs') %>
+
+  <script>
+    const setInfoSubject = document.querySelector('.setInfo-subject').innerText
+    const setInfoSubcategory = document.querySelector(".setInfo-subcategory").innerText
+    const setInfoTitle = document.querySelector(".setInfo-title").innerText
+    const setInfoPublic = document.querySelector(".setInfo-public").innerText === "public" ? "on" : "" 
+
+    const setInfo = {
+      subject: setInfoSubject,
+      subcategory: setInfoSubcategory,
+      title: setInfoTitle,
+      public: setInfoPublic
+    }
+
+    sessionStorage.setItem("storedSetInfo", JSON.stringify(setInfo))
+
+    const addCards = () => { 
+      window.location.href = "/create"
+    }
+
+    const editSet = () => {
+      
+    }
+
+    const deleteSet = () => {
+      
+    }
+    
+
+  </script>
 </body>
 </html>

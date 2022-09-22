@@ -1,6 +1,8 @@
 <div class="set-card card">
-  <h1><%= result[0].subcategory %></h1>
-  <h3><%= result[0].title %></h3>
+  <h1 class="setInfo-subcategory"><%= result[0].subcategory %></h1>
+  <h3 class="setInfo-title"><%= result[0].title %></h3>
   <h3>Author: <%= result[0].author %></h3>
+  <p class="setInfo-public hide"><%= result[0].public === "on" ? "public" : "private" %></p>
+  <p class="setInfo-subject hide"><%= result[0].subject %></p>
   <p>There are <%= result.length %> cards in this set.</p>
 </div>

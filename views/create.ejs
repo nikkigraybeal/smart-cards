@@ -7,7 +7,7 @@
   <%- include('./partials/nav.ejs') %>
 
   <div class="create-set-container">
-
+    
     <div class="set-info">
       <% if (!Array.isArray(setInfo)) { %>
         <h3>Subject: <span class="set-info-subject"><%= setInfo.subject %></span></h3>
@@ -115,6 +115,28 @@
       setInfo.innerHTML = html
       setInput.classList.add('hide')
     })
+
+    if (sessionStorage.storedSetInfo) {
+      const storedSetInfo = JSON.parse(sessionStorage.storedSetInfo)
+      html = `
+        <h3>Subject: ${storedSetInfo.subject}</h3>
+        <h3>Subcategory: ${storedSetInfo.subcategory}</h3>
+        <h3>Title: ${storedSetInfo.title}</h3>
+        <h3>Public: <span class="set-info-public">${storedSetInfo.public === "on" ? "true" : "false"}</span></h3>
+      `
+       setInfo.innerHTML = html
+       // setInput.classList.add('hide')
+      
+      // set input values
+      const setInfoPublic = document.querySelector('.set-info-public')
+      subject.value = storedSetInfo.subject
+      subcategory.value = storedSetInfo.subcategory
+      title.value = storedSetInfo.title
+      if (setInfoPublic.innerText === "true" && public.checked === false ||
+          setInfoPublic.innerText === "false" && public.checked === true)  {
+        public.click()
+      }
+    }
 
     // ADD LINKS TO LINK DISPLAY DIV ON "ADD"
     //elements

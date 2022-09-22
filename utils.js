@@ -21,7 +21,9 @@ const getSetInfo = (cards) => {
       setInfo[card.subject][card.subcategory].push(card.title)
     }
   })
-  console.log(setInfo)
+  //  {Science: {biology: [meiosis], computer science: [terminology]},
+  //   History: {american rev: [people, places, events]
+  //  }
   return setInfo
 }
 
