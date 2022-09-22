@@ -1,8 +1,16 @@
 <nav>
   <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/create">Create</a></li>
+    <li><a href="/" onclick="deleteSessionStorage()">Home</a></li>
+    <li><a href="/create" onclick=deleteSessionStorage()>Create</a></li>
     <li><a href="/about">About</a></li>
     <li><a href="/login-signup">Login/Signup</a></li>
   </ul>
 </nav>
+
+<script>
+
+  const deleteSessionStorage = () => {
+    sessionStorage.clear()
+  }
+
+</script>
