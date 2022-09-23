@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { boolean } = require('webidl-conversions')
 const Schema = mongoose.Schema
 
 const cardSchema = new Schema({
@@ -9,15 +8,15 @@ const cardSchema = new Schema({
   },
   subject: {
     type: String,
-    required: true
+    required: [true, 'subject field is required']
   },
   subcategory: {
     type: String,
-    required: true
+    required: [true, 'subcategory field is required']
   },
   title: {
     type: String,
-    required: true
+    required: [true, 'title field is required']
   },
   public: {
     type: String,
@@ -25,15 +24,15 @@ const cardSchema = new Schema({
   },
   question: {
     type: String,
-    required: true
+    required: [true, 'question field is required']
   },
   links: {
     type: String,
-    required: false
+    required: false 
     },
   answer: {
     type: String,
-    required: true, 
+    required: [true, 'answer field is required'] 
   }
 })
 

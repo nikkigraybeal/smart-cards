@@ -24,7 +24,7 @@
     <form action="/create" method="POST">
       <div class="set-input">
         <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required>
+        <input type="text" id="subject" name="subject" >
         <label for="subcategory">Subcategory:</label>
         <input type="text" id="subcategory" name="subcategory" required>
         <label for="title">Title:</label>
@@ -125,7 +125,7 @@
         <h3>Public: <span class="set-info-public">${storedSetInfo.public === "on" ? "true" : "false"}</span></h3>
       `
        setInfo.innerHTML = html
-       // setInput.classList.add('hide')
+       setInput.classList.add('hide')
       
       // set input values
       const setInfoPublic = document.querySelector('.set-info-public')
