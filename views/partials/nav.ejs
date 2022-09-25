@@ -1,9 +1,17 @@
 <nav>
   <ul>
-    <li><a href="/" onclick="deleteSessionStorage()">Home</a></li>
-    <li><a href="/create" onclick=deleteSessionStorage()>Create</a></li>
+    <% if (user) { %>
+      <li><a href="/home" onclick="deleteSessionStorage()">Home</a></li>
+      <li><a href="/create" onclick=deleteSessionStorage()>Create</a></li>
+      <li><a href="/logout">Logout</a></li>
+    <% } else { %>
+      <li><a href="/" onclick="deleteSessionStorage()">Home</a></li>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/signup">Signup</a></li>
+      <% } %>
+    
     <li><a href="/about">About</a></li>
-    <li><a href="/login-signup">Login/Signup</a></li>
+    
   </ul>
 </nav>
 

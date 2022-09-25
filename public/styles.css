@@ -43,6 +43,9 @@ header h1{
   text-align: center;
   font-size: 50px;
 }
+header h2{
+  text-align: center;
+}
 input{
   border: 1px solid #777;
   border-radius: 4px;
@@ -94,6 +97,7 @@ footer{
   justify-content: center;
   width: 250px;
   height: 200px;
+  margin: 15px auto;
   border-radius: 4px;
   padding: 15px;
   overflow-y: auto;
@@ -109,7 +113,7 @@ footer{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 15px auto 15px;
+  margin: 15px auto;
   padding: 20px 40px 20px;
   width: 500px;
   height: 250px;
@@ -185,6 +189,12 @@ footer{
   font-size: .75em;
   margin-top: 5px;
   color: gray;
+}
+.signup-container input{
+  margin: 20px 0;
+}
+.email.error, .password.error {
+  color: red;
 }
 .hide{
   display: none;

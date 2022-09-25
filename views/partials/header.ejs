@@ -1,3 +1,7 @@
 <header>
   <a href="/"><h1>Smart Cards</h1></a>
+  <% if (user) { %>
+    <h2>Welcome <%= user.username %></h2>
+  <% } %>
+  
 </header>

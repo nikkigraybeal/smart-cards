@@ -1,30 +1,24 @@
 const Card = require('../models/card')
 const utils = require('../utils')
 
-// handle errors
-const handleErrors = (err) => {
-  console.log(err.message, err.code)
-  let errors = { subject: '', subcategory: '', title: '', question: '', answer: ''}
-
-  // validation errors
-  if (err.message.includes('Card validation failed')) {
-    Object.values(err.errors).forEach(({ properties }) => {  // destructure properties from error.properties
-      errors[properties.path] = properties.message
-    })
-  }
-
-  return errors
-}
-
-module.exports.home_get = (req, res) => {
+module.exports.home_get = (req, res) => { 
   Card.find()
     .then(result => {
-      setInfo = utils.getSetInfo(result)
+      const setInfo = utils.getSetInfo(result)
       res.render('index', { title: 'Home', setInfo })
     })
     .catch(err => {
       console.log(err)
     }) 
+}
+
+module.exports.user_home_get = (req, res) => {
+  console.log(req.params)
+  Card.find()
+    .then(result => {
+      const setInfo = utils.getSetInfo(result)
+      res.render('index', { title: 'Home', setInfo })
+    })
 }
 
 module.exports.set_get = (req, res) => {
@@ -64,7 +58,6 @@ module.exports.create_post = (req, res) => {
       res.render('create', { title: 'Create New Cards', setInfo: result })
     })
     .catch(err => {
-      const errors = handleErrors(err)
-      res.status(400).json({ errors })
+      console.log(err)
     }) 
 }
