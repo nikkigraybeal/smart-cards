@@ -22,7 +22,7 @@ const requireAuth = (req, res, next) => {
   }
 }
 
-// check current user
+// check current user and make user available to views
 const checkUser = (req, res, next) => {
   const token = req.cookies.jwt
   if (token) {

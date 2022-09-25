@@ -33,6 +33,7 @@ app.use(cookieParser())
 
 // routes
 app.get('*', checkUser)
+app.post('*', checkUser)
 app.use(cardRoutes)
 app.use(authRoutes)
 
