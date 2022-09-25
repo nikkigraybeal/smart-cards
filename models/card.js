@@ -6,6 +6,10 @@ const cardSchema = new Schema({
     type: String,
     required: true
   },
+  authorId: {
+    type: String,
+    required: true
+  },
   subject: {
     type: String,
     required: [true, 'subject field is required']
