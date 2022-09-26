@@ -80,3 +80,28 @@ module.exports.create_post = (req, res) => {
       console.log(err)
     }) 
 }
+
+module.exports.edit_set_get = (req, res) => {
+  res.render('edit-set', { title: 'Edit Set Info' })
+}
+module.exports.edit_set_post = (req, res) => {
+  let public = req.body.public
+  public === undefined ? public = "" : public = "on"
+  Card.updateMany({ title: req.body.previousTitle, authorId: req.body.authorId}, 
+                  { subject: req.body.subject,
+                    subcategory: req.body.subcategory,
+                    title: req.body.title,
+                    public: public
+                   })
+    .then(result => {
+      console.log(result)
+      res.redirect('/home')
+    })
+                 
+}
+module.exports.edit_card_get = (req, res) => {
+  
+}
+module.exports.edit_card_post = (req, res) => {
+  
+}

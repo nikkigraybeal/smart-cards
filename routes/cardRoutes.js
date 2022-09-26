@@ -10,5 +10,9 @@ router.get('/:subcategory/:title', cardController.set_get)
 router.delete('/:subcategory/:title', cardController.set_delete)
 router.get('/create', requireAuth, cardController.create_get)
 router.post('/create', cardController.create_post)
+router.get('/edit-set', requireAuth, cardController.edit_set_get)
+router.post('/edit-set', cardController.edit_set_post)
+router.get('/edit-card', requireAuth, cardController.edit_card_get)
+router.get('/edit-card', cardController.edit_card_post)
 
 module.exports = router
