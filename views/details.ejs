@@ -14,7 +14,8 @@
   <% } %>
   
   <%- include('./partials/card-container.ejs') %>
-
+  
+  <div class="signup-message"></div>
 </main>
   
   <%- include('./partials/footer.ejs') %>
@@ -54,6 +55,24 @@
       .catch(err => console.log(err))
     }
     
+    // click handlers for cardBack
+    const handleCorrectClick = () => {
+      signupMessage.innerHTML = `
+        <h3>Smart Card capabilities coming soon!</h3>
+        `
+    }
+    const handleIncorrectClick = () => {
+      signupMessage.innerHTML = `
+        <h3>Smart Card capabilities coming soon!</h3>
+        `
+    }
+    const signupMessage = document.querySelector('.signup-message')
+    const handleDisplaySignUpMessage = () => {
+      signupMessage.innerHTML = `
+        <h3>Signup or Login to use Smart Card capabilities!</h3>
+        `
+    }
+
 
   </script>
 </body>

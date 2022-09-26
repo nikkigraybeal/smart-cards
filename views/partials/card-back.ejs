@@ -12,9 +12,17 @@
           
       </div>  
     
-      <div class="feedback-container">
-        <div class="correct">Nailed it!</div>
-        <div class="incorrect">Blew it!</div>
-      </div>
+      <% if (user) { %> 
+        <div class="feedback-container">
+          <div class="correct" onclick="handleCorrectClick()" >Nailed it!</div>
+          <div class="incorrect" onclick="handleIncorrectClick()" >Blew it!</div>
+        </div>
+      <% } else { %>
+        <div class="feedback-container">
+          <div class="correct" onclick="handleDisplaySignUpMessage()">Nailed it!</div>
+          <div class="incorrect" onclick="handleDisplaySignUpMessage()">Blew it!</div>
+        </div>
+      <% } %>
+     
   </div>
 <% }) %>
