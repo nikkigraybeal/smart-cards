@@ -7,7 +7,32 @@
   <%- include('./partials/nav.ejs') %>
 
   <main>
-  
+    <% if (!Array.isArray(userSetInfo) && Object.keys(userSetInfo).length > 0) { %>  
+      <h2>My Card Sets</h2>
+      <div class="browse">
+        <% Object.entries(userSetInfo).map(([subject, subcatsObj]) => { %>
+          <div class="browse-subject">
+            <h3><%= subject %></h3>
+            <div class="browse-subcategory">
+              <% Object.entries(subcatsObj).map(([subcat, titleArr]) => { %>
+                <h4><%= subcat %></h4>
+                <% titleArr.map(title => { %>
+                  <a href="/<%= subcat %>/<%= title %>"><%= title %></a>
+                <% }) %>
+              <% }) %>
+              </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="message">
+        <p>You haven't created any cards yet.</p>
+        <h3>Click "CREATE" to get started.</h3>
+        <h2>OR</h2>
+      </div>
+      
+    <% } %>
+
     <p>Search available card sets:</p>
     <input type="text" id="search" name="search">
     <button class="search-button" type="button">search</button>

@@ -32,7 +32,6 @@ userSchema.statics.login = async function (email, password) {
   if (user) {
     const auth = await bcrypt.compare(password, user.password) // bcrypt hashes unhashed password entered by login
     if (auth) {
-      console.log("user from model: ", user)
       return user
     } 
     throw Error('incorrect password')
