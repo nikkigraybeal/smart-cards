@@ -6,8 +6,8 @@
   <%- include('./partials/header.ejs') %>
   <%- include('./partials/nav.ejs') %>
 <main>
-  <!-- result has cards from a specific subcategory and title -->
-  <% if (user) { %>
+  <!-- result contains cards from a specific subcategory and title -->
+  <% if (user && user.id === result[0].authorId) { %>
     <button class="add-cards" onclick="addCards()">Add Cards</button>
     <button class="edit-set" onclick="editSet()">Edit Set Info</button>
     <button class="delete-set" onclick="removeSet()">Delete Set</button>

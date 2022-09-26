@@ -24,13 +24,17 @@
           </div>
         <% }) %>
       </div>
-    <% } else { %>
+    <% } else if (user) { %>
       <div class="message">
         <p>You haven't created any cards yet.</p>
         <h3>Click "CREATE" to get started.</h3>
         <h2>OR</h2>
       </div>
-      
+    <% } else { %>
+      <div class="message">
+        <h3>Login or Signup to create cards.</h3>
+        <h2>OR</h2>
+      </div>
     <% } %>
 
     <p>Search available card sets:</p>

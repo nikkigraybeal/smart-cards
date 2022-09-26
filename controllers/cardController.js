@@ -18,18 +18,15 @@ module.exports.user_home_get = (req, res) => {
   let setInfo
   let userSetInfo
   const token = req.cookies.jwt 
-  console.log("TOKEN: ", token)
   // check json web token exists and is verified
   if (token) {
     jwt.verify(token, 'my secret', (err, decodedToken) => {
-      console.log("ID: ", decodedToken.id)
       Card.find({ public: 'on'})
         .then(result => {
           setInfo = utils.getSetInfo(result)
           Card.find({ authorId: decodedToken.id })
             .then(result => {
               userSetInfo = utils.getSetInfo(result)
-              console.log(Object.keys(userSetInfo).length)
               res.render('index', { title: 'Home', setInfo, userSetInfo})
             })
         })
