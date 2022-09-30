@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const { isEmail } = require('validator')
 const bcrypt = require('bcrypt')
+const { stringify } = require('querystring')
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -17,7 +18,10 @@ const userSchema = new mongoose.Schema({
   },
   username: {
     type: String
-  }
+  },
+  cardStats: [
+    { cardId: mongoose.Types.ObjectId, consecutiveCorrectAnswers: Number,  lastViewed: Date }
+  ]
 })
 
 // fire a function before doc saved to db with mongoose hooks
