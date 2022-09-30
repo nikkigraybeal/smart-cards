@@ -40,7 +40,9 @@
 
   goNextButton.addEventListener('click', () => {
     if (goNextButton.innerText === "Go!") {
-      editCardButton.classList.remove('hide')
+      if (editCardButton) {
+        editCardButton.classList.remove('hide')
+      }
       setCard.style.zIndex = "0"
       cardFronts[index].style.zIndex = "1"
       cardBacks[index].style.zIndex = "1"
