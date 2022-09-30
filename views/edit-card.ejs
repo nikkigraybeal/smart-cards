@@ -7,34 +7,8 @@
   <%- include('./partials/nav.ejs') %>
 
   <div class="create-set-container"> 
-    
-    <div class="set-info">
-      <% if (!Array.isArray(setInfo)) { %>
-        <h3>Subject: <span class="set-info-subject"><%= setInfo.subject %></span></h3>
-        <h3>Subcategory: <span class="set-info-subcategory"><%= setInfo.subcategory %></span></h3>
-        <h3>Title: <span class="set-info-title"><%= setInfo.title %></span></h3>
-        <% if (setInfo.public === "on") { %>
-          <h3>Public: <span class="set-info-public">true</span></h3>
-        <% } else { %>
-          <h3>Public: <span class="set-info-public">false</span></h3>
-        <% } %>
-      <% } %>
-    </div>
 
-    <form action="/create" method="POST">
-      <div class="set-input">
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" required>
-        <label for="subcategory">Subcategory:</label>
-        <input type="text" id="subcategory" name="subcategory" required>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-        
-        <input type="checkbox" id="public" name="public"/>
-        <label class="public-label" for="public">Make Set Public</label>
-        
-        <button class="save-set-button" type="button">Save</button>
-      </div>
+    <form action="/edit-card" method="POST" id="card-update-form" name="card-update-form">
       
       <div class="card-input">
         <label for="question">Question:</label>
@@ -50,10 +24,12 @@
           <p>Added links will appear here.</p>
         </div>
 
-        <div class="hide">
-          <input type="text" name="authorId" value="<%= user._id %>"><%= user._id %></input>
-          <input type="text" name="author" value="<%= user.username %>"><%= user.username %></input>
+        <div class="">
+          <input type="text" id="cardId" name="cardId"></input>
           <input class="hidden-links-input" name="links"></input>
+          <input type="text" id="subcategory" name="subcategory"></input>
+          <input type="text" id="title" name="title"></input>
+
         </div>
         
         <button class="save-card-button">Save Card</button>
@@ -63,3 +39,88 @@
   </div>
 
   <%- include('./partials/footer.ejs') %>
+
+  <script>
+    const storedCardInfo = JSON.parse(sessionStorage.storedCardInfo)
+    const storedSetInfo = JSON.parse(sessionStorage.storedSetInfo)
+
+    console.log("from view stored card info: ", storedCardInfo)
+       
+    // pre populate inputs with previous vals and submit any updated vals
+    document.forms['card-update-form']['question'].value = storedCardInfo.question
+    document.forms['card-update-form']['answer'].value = storedCardInfo.answer
+    document.forms['card-update-form']['cardId'].value = storedCardInfo.cardId
+    document.forms['card-update-form']['subcategory'].value = storedSetInfo.subcategory
+    document.forms['card-update-form']['title'].value = storedSetInfo.title
+
+    // ADD LINKS TO LINK DISPLAY DIV ON "ADD"
+    //elements
+    const link = document.getElementById('link')
+    const addLinkButton = document.querySelector('.add-link-button')
+    const addedLinksDiv = document.querySelector('.added-links')
+    const hiddenLinksInput = document.querySelector('.hidden-links-input')
+    const saveCardButton = document.querySelector('.save-card-button')
+
+    const updateLinksInput = () => {
+    const links = document.querySelectorAll('.added-links a')
+    hiddenLinksInput.value = ''
+    links.forEach(link => {
+      hiddenLinksInput.value += `${link.href}, `
+    })
+  }
+
+    // pre populate links div with previous links
+    if (storedCardInfo.links !== '') {
+      addedLinksDiv.innerText = ''
+      storedCardInfo.links.split(',').forEach(link => {
+        if (link === "") return
+        addedLinksDiv.innerHTML += `
+          <a href=${link}>${link.slice(0, 27)}</a><span class="material-symbols-outlined link-trash">delete</span><br>`
+        updateLinksInput()
+        const trashcans = document.querySelectorAll('.link-trash')
+        trashcans.forEach(can => {
+          can.addEventListener('click', () => {
+            can.previousSibling.remove()
+            can.remove()
+            updateLinksInput()
+          })
+        })
+      })
+    }
+
+    const validateLink = (link) => {
+    const www = link.slice(0, 3).search("www")
+    if (www != -1) {
+      return `https://${link}`
+    }
+    const https = link.search("https://www.")
+    const http = link.search("http://www.")
+    if (https === -1 && http === -1) {
+      return `https://www.${link}`
+    } 
+    return link
+  }
+
+    addLinkButton.addEventListener('click', () => {
+      if (addedLinksDiv.innerText === "Added links will appear here.") {
+        addedLinksDiv.innerText = ''
+      }
+
+      let ValidatedLink = validateLink(link.value)
+      addedLinksDiv.innerHTML += `
+      <a href=${ValidatedLink}>${ValidatedLink.slice(0, 27)}</a><span class="material-symbols-outlined link-trash">delete</span><br>`
+      link.value = ''
+      updateLinksInput()
+
+      // add listener to trashcans
+      const trashcans = document.querySelectorAll('.link-trash')
+      trashcans.forEach(can => {
+        can.addEventListener('click', () => {
+          can.previousSibling.remove()
+          can.remove()
+          updateLinksInput()
+        })
+      })
+    })
+
+  </script>

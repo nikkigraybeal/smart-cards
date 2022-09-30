@@ -11,6 +11,7 @@
     <button class="add-cards" onclick="addCards()">Add Cards</button>
     <button class="edit-set" onclick="editSet()">Edit Set Info</button>
     <button class="delete-set" onclick="removeSet()">Delete Set</button>
+    <button class="edit-card hide" onclick="editCard()">Edit Card</button>
   <% } %>
   
   <%- include('./partials/card-container.ejs') %>
@@ -21,6 +22,7 @@
   <%- include('./partials/footer.ejs') %>
 
   <script>
+    // set elements
     const setInfoSubject = document.querySelector('.setInfo-subject').innerText
     const setInfoSubcategory = document.querySelector(".setInfo-subcategory").innerText
     const setInfoTitle = document.querySelector(".setInfo-title").innerText
@@ -34,7 +36,7 @@
     }
 
     sessionStorage.setItem("storedSetInfo", JSON.stringify(setInfo))
-
+   
     const addCards = () => { 
       window.location.href = "/create"
     }
@@ -53,6 +55,10 @@
       .then((response) => response.json())
       .then((data) => window.location.href = data.redirect)
       .catch(err => console.log(err))
+    }
+
+    const editCard = () => {
+      window.location.href = "/edit-card"
     }
     
     // click handlers for cardBack

@@ -41,18 +41,18 @@
     const storedSetInfo = JSON.parse(sessionStorage.storedSetInfo)
 
     // persist previous values
-    document.forms['set-update-form']['previousSubject'].value = `${storedSetInfo.subject}`
-    document.forms['set-update-form']['previousSubcategory'].value = `${storedSetInfo.subcategory}`
-    document.forms['set-update-form']['previousTitle'].value = `${storedSetInfo.title}`
+    document.forms['set-update-form']['previousSubject'].value = storedSetInfo.subject
+    document.forms['set-update-form']['previousSubcategory'].value = storedSetInfo.subcategory
+    document.forms['set-update-form']['previousTitle'].value = storedSetInfo.title
     const previousPublic = document.getElementById('previousPublic')
     if (storedSetInfo.public === "on") {
       previousPublic.click()
     }
        
     // pre populate inputs with previous vals and submit any updated vals
-    document.forms['set-update-form']['subject'].value = `${storedSetInfo.subject}`
-    document.forms['set-update-form']['subcategory'].value = `${storedSetInfo.subcategory}`
-    document.forms['set-update-form']['title'].value = `${storedSetInfo.title}`
+    document.forms['set-update-form']['subject'].value = storedSetInfo.subject
+    document.forms['set-update-form']['subcategory'].value = storedSetInfo.subcategory
+    document.forms['set-update-form']['title'].value = storedSetInfo.title
     const public = document.getElementById('public')
     if (storedSetInfo.public === "on") {
       public.click()

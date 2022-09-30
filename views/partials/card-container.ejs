@@ -20,13 +20,31 @@
   const flip = document.querySelector('.flip')   
   const cardBacks = document.querySelectorAll('.card-back')
   const cardFronts = document.querySelectorAll('.card-front')
+  const editCardButton = document.querySelector('.edit-card')
   let index = 0
+
+  const saveCardInfo = (cardFront, cardBack) => {
+    const cardInfoQuestion = cardFront.firstElementChild.innerText
+    const cardInfoAnswer = cardBack.firstElementChild.innerText
+    const cardInfoCardId = cardBack.firstElementChild.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    const cardInfoLinks = cardBack.firstElementChild.nextElementSibling.lastElementChild.innerText
+    
+    const cardInfo = {
+      question: cardInfoQuestion,
+      answer: cardInfoAnswer,
+      cardId: cardInfoCardId,
+      links: cardInfoLinks
+    }
+    sessionStorage.setItem("storedCardInfo", JSON.stringify(cardInfo))
+  }
 
   goNextButton.addEventListener('click', () => {
     if (goNextButton.innerText === "Go!") {
+      editCardButton.classList.remove('hide')
       setCard.style.zIndex = "0"
       cardFronts[index].style.zIndex = "1"
       cardBacks[index].style.zIndex = "1"
+      saveCardInfo(cardFronts[index], cardBacks[index])
       goNextButton.innerText = "Next"
       flip.classList.remove('hide')
     } else {
@@ -43,12 +61,14 @@
       index = 0
       cardFronts[index].style.zIndex = "1"
       cardBacks[index].style.zIndex = "1"
+      saveCardInfo(cardFronts[index], cardBacks[index])
      } else {
       cardFronts[index].style.zIndex = "0"
       cardBacks[index].style.zIndex = "0"
       index += 1
       cardFronts[index].style.zIndex = "1"
       cardBacks[index].style.zIndex = "1"
+      saveCardInfo(cardFronts[index], cardBacks[index])
      }
     }
 

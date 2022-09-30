@@ -1,3 +1,4 @@
+const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const Card = require('../models/card')
 const utils = require('../utils')
@@ -100,8 +101,24 @@ module.exports.edit_set_post = (req, res) => {
                  
 }
 module.exports.edit_card_get = (req, res) => {
-  
+  res.render('edit-card', { title: 'Edit Card Info' })
 }
 module.exports.edit_card_post = (req, res) => {
-  
+  const subcategory = req.body.subcategory
+  const title = req.body.title
+  console.log(req.body.cardId)
+  const cardId = mongoose.Types.ObjectId(req.body.cardId)
+  console.log(cardId)
+  Card.updateOne({ _id: cardId }, 
+                  { $set: {
+                    question: req.body.question,
+                    answer: req.body.answer,
+                    links: req.body.links
+                  }
+                    
+                   })
+    .then(result => {
+      console.log(result)
+      res.redirect(`/${subcategory}/${title}`)
+    })
 }

@@ -1,15 +1,16 @@
 <% result.map(card => { %> 
   <div class="card-back card hide">
-      <h3><%= card.answer %></h3>
+      <h3 class="answer"><%= card.answer %></h3>
     
       <div class="links-container">
         <% if (card.links) { %>
           <h3>More Information:</h3>
           <% card.links.split(', ').map(link => { %>
-            <a onClick="window.open(`<%= link %>`)"><%= link.slice(0, 30) %></a><br>
+            <a onclick="window.open(`<%= link %>`)"><%= link.slice(0, 30) %></a><br>
           <% }) %>
          <% } %>
-          
+          <p class="card-id hide"><%= card._id %></p>
+          <p class="links hide"><%= card.links %></p> 
       </div>  
     
       <% if (user) { %> 
