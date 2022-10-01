@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
 const Card = require('../models/card')
+const User = require('../models/user')
 const utils = require('../utils')
 
 module.exports.home_get = (req, res) => { 
@@ -106,9 +107,7 @@ module.exports.edit_card_get = (req, res) => {
 module.exports.edit_card_post = (req, res) => {
   const subcategory = req.body.subcategory
   const title = req.body.title
-  console.log(req.body.cardId)
   const cardId = mongoose.Types.ObjectId(req.body.cardId)
-  console.log(cardId)
   Card.updateOne({ _id: cardId }, 
                   { $set: {
                     question: req.body.question,
@@ -118,7 +117,27 @@ module.exports.edit_card_post = (req, res) => {
                     
                    })
     .then(result => {
-      console.log(result)
       res.redirect(`/${subcategory}/${title}`)
     })
+}
+module.exports.feedback_post = async (req, res) => {
+  const cardId = req.body.cardId
+  const userId = req.body.userId
+  const cardIdArr = []
+  const user = await User.findById(userId)
+
+  user.cardStats.forEach(stat => {
+    cardIdArr.push(stat.cardId)
+  })
+  if (cardIdArr.includes(cardId)) {
+    user.cardStats.forEach(stat => {
+      if (cardId == stat.cardId) {
+        stat.consecutiveCorrectAnswers += 1
+        stat.lastViewed = Date.now()
+      } 
+    })
+  } else {
+    user.cardStats.push({ cardId, consecutiveCorrectAnswers: 1, lastViewed: Date.now() })
+  }
+  const updated = await user.save()
 }

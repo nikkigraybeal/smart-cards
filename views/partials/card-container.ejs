@@ -1,6 +1,9 @@
 <div>
 
   <div class="card-container">
+    <% if (user) { %>
+      <div class="user-id hide"><%= user._id %></div>
+    <% } %>
 
     <%- include('./set-card.ejs') %> 
     <%- include('./card-front.ejs') %>   
@@ -14,25 +17,27 @@
 </div>
 
 <script>
-
+  const userId = document.querySelector('.user-id')
   const setCard = document.querySelector('.set-card')
   const goNextButton = document.querySelector('.go-next-button')
   const flip = document.querySelector('.flip')   
   const cardBacks = document.querySelectorAll('.card-back')
   const cardFronts = document.querySelectorAll('.card-front')
   const editCardButton = document.querySelector('.edit-card')
+  const signupMessage = document.querySelector('.signup-message')
+  let currentCardId
   let index = 0
 
   const saveCardInfo = (cardFront, cardBack) => {
     const cardInfoQuestion = cardFront.firstElementChild.innerText
     const cardInfoAnswer = cardBack.firstElementChild.innerText
-    const cardInfoCardId = cardBack.firstElementChild.nextElementSibling.lastElementChild.previousElementSibling.innerText
+    currentCardId = cardBack.firstElementChild.nextElementSibling.lastElementChild.previousElementSibling.innerText
     const cardInfoLinks = cardBack.firstElementChild.nextElementSibling.lastElementChild.innerText
     
     const cardInfo = {
       question: cardInfoQuestion,
       answer: cardInfoAnswer,
-      cardId: cardInfoCardId,
+      cardId: currentCardId,
       links: cardInfoLinks
     }
     sessionStorage.setItem("storedCardInfo", JSON.stringify(cardInfo))
@@ -74,6 +79,7 @@
      }
     }
 
+
     signupMessage.innerHTML = ''
     
   })
@@ -86,4 +92,35 @@
         cardFront.classList.add('hide')
       })
     })
+
+    
+  // click handlers for cardBack
+
+  const handleCorrectClick = () => {
+    const uId = userId.innerHTML
+
+    fetch('/feedback', {
+      method: 'POST',
+      headers: {
+                "Content-Type": "application/json"
+            },
+      body: JSON.stringify({ 
+        cardId: currentCardId,
+        userId: uId
+      })
+    })
+    .then((response) => response.json())
+    .catch(err => console.log(err))
+  }
+  const handleIncorrectClick = () => {
+    signupMessage.innerHTML = `
+      <h3>smart card capabilities coming soon!</h3>
+    `
+  }
+  
+  const handleDisplaySignUpMessage = () => {
+    signupMessage.innerHTML = `
+      <h3>Signup or Login to use Smart Card capabilities!</h3>
+      `
+  }
 </script>

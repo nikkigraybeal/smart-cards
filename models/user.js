@@ -3,6 +3,7 @@ const { isEmail } = require('validator')
 const bcrypt = require('bcrypt')
 const { stringify } = require('querystring')
 
+
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
@@ -20,7 +21,9 @@ const userSchema = new mongoose.Schema({
     type: String
   },
   cardStats: [
-    { cardId: mongoose.Types.ObjectId, consecutiveCorrectAnswers: Number,  lastViewed: Date }
+    { cardId: String,
+     consecutiveCorrectAnswers: Number,  
+     lastViewed: Number }
   ]
 })
 
