@@ -42,17 +42,19 @@ module.exports.user_home_get = (req, res) => {
   }
 }
 
-module.exports.set_get = (req, res) => {
+module.exports.set_get = async (req, res) => {
   const subcategory = req.params.subcategory
   const title = req.params.title
+  const author = req.params.author
+  const userId = req.params.userId
+  console.log("userID: ", userId)
 
-  Card.find({ subcategory, title })
-    .then(result => {
-      res.render('details', { title: 'Details', result })
-    })
-    .catch(err => {
-      console.log(err)
-    }) 
+  let result = await Card.find({ subcategory, title, author })
+    
+  result  = await utils.sortResult(result, userId)
+  res.render('details', { title: 'Details', result })
+    
+   
 }
 
 module.exports.set_delete = (req, res) => {
@@ -139,5 +141,5 @@ module.exports.feedback_post = async (req, res) => {
   } else {
     user.cardStats.push({ cardId, consecutiveCorrectAnswers: 1, lastViewed: Date.now() })
   }
-  const updated = await user.save()
+  await user.save()
 }

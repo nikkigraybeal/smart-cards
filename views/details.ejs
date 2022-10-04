@@ -7,14 +7,19 @@
   <%- include('./partials/nav.ejs') %>
 <main>
   <!-- result contains cards from a specific subcategory and title -->
-  <% if (user && user.id === result[0].authorId) { %>
-    <button class="add-cards" onclick="addCards()">Add Cards</button>
-    <button class="edit-set" onclick="editSet()">Edit Set Info</button>
-    <button class="delete-set" onclick="removeSet()">Delete Set</button>
-    <button class="edit-card hide" onclick="editCard()">Edit Card</button>
-  <% } %>
+  <% if (result.length === 0) { %>
+    <h3>You don't have any cards to practice in this set!</h3>
+  <% } else { %>
   
-  <%- include('./partials/card-container.ejs') %>
+    <% if (user && user.id === result[0].authorId) { %>
+      <button class="add-cards" onclick="addCards()">Add Cards</button>
+      <button class="edit-set" onclick="editSet()">Edit Set Info</button>
+      <button class="delete-set" onclick="removeSet()">Delete Set</button>
+      <button class="edit-card hide" onclick="editCard()">Edit Card</button>
+    <% } %>
+    
+    <%- include('./partials/card-container.ejs') %>
+    <% } %>
   
 </main>
   

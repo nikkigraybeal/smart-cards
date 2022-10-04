@@ -14,10 +14,10 @@
           <div class="browse-subject">
             <h3><%= subject %></h3>
             <div class="browse-subcategory">
-              <% Object.entries(subcatsObj).map(([subcat, titleArr]) => { %>
+              <% Object.entries(subcatsObj).map(([subcat, titleObj]) => { %>
                 <h4><%= subcat %></h4>
-                <% titleArr.map(title => { %>
-                  <a href="/<%= subcat %>/<%= title %>"><%= title %></a>
+                <% Object.entries(titleObj).map(([title, author]) => { %>
+                  <a href="/<%= user._id %>/<%= author %>/<%= subcat %>/<%= title %>"><%= title %></a>
                 <% }) %>
               <% }) %>
               </div>
@@ -47,10 +47,10 @@
         <div class="browse-subject">
           <h3><%= subject %></h3>
           <div class="browse-subcategory">
-            <% Object.entries(subcatsObj).map(([subcat, titleArr]) => { %>
+            <% Object.entries(subcatsObj).map(([subcat, titleObj]) => { %>
               <h4><%= subcat %></h4>
-              <% titleArr.map(title => { %>
-                <a href="/<%= subcat %>/<%= title %>"><%= title %></a>
+              <% Object.entries(titleObj).map(([title, author]) => { %>
+                <a href="/<%= user._id %>/<%= author %>/<%= subcat %>/<%= title %>"><%= title %></a>
               <% }) %>
             <% }) %>
             </div>

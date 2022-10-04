@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const User = require('./models/user')
 
+
+// create object to pass set info to views
 const getSetInfo = (cards) => {
   const setInfo = {}
   cards.forEach(card => {
@@ -8,52 +10,50 @@ const getSetInfo = (cards) => {
       setInfo[card.subject] = {}
     }
   })
-  //  {Science: {},
-  //   History: {}
-  //  }
   cards.forEach(card => {
     if (!(card.subcategory in setInfo[card.subject])) {
-      setInfo[card.subject][card.subcategory] = []
+      setInfo[card.subject][card.subcategory] = {}
     }
   })
-  //  {Science: {biology: [], computer science: []},
-  //   History: {american rev: []
-  //  }
   cards.forEach(card => {
-    if (!setInfo[card.subject][card.subcategory].includes(card.title)) {
-      setInfo[card.subject][card.subcategory].push(card.title)
+    if (!(card.title in setInfo[card.subject][card.subcategory])) {
+      setInfo[card.subject][card.subcategory][card.title] = card.author
     }
   })
-  //  {Science: {biology: [meiosis], computer science: [terminology]},
-  //   History: {american rev: [people, places, events]
-  //  }
+  // {subject: {subcategory: {title: author}}
   return setInfo
 }
 
-const updateCardStats = (cardId, userId) => {
-  cardId = mongoose.Types.ObjectId(cardId)
-  const cardIdArr = []
-  User.findById(userId)
-    .then(result => {
-      result.cardStats.forEach(stat => {
-        cardIdArr.push(stat.cardId)
-      })
-      if (cardIdArr.includes(cardId)) {
-        result.cardStats.forEach(stat => {
-          if (cardId === stat.cardId) {
-            stat.consecutiveCorrectAnswers += 1
-            stat.lastViewed = Date.now()
-          } 
-        })
-      } else {
-        result.cardStats.push({ cardId, consecutiveCorrectAnswers: 1, lastViewed: Date.now() })
-      }
-      console.log("utils cardstats: ", result.cardStats)
-      return result.cardStats
-      })
+const keepCard = (statsObj) => {
+  const today = Date.now()
+  const daysSinceLastView = Math.round((today - statsObj.lastViewed) / (86400 * 1000))
+  
+  if (daysSinceLastView >= statsObj.consecutiveCorrectAnswers) {
+    return true
+  }
+  return false
+}
+
+// remove cards from set that user has recently answered correctly
+const sortResult = async (result, userId) => {
+  const user = await User.findById(userId)
+  const statsArr = user.cardStats  // arrray of objects - stats for all cards viewed statsArr.cardId
+  const idArr = statsArr.map(cardStats => cardStats.cardId)
+  const sorted = []
+
+  result.forEach(card => {
+    const card_id = card._id.valueOf()
+    !idArr.includes(card_id) ? sorted.push(card) : 
+      statsArr.forEach(cardStats => {
+        if (card_id === cardStats.cardId && (keepCard(cardStats))) {
+          sorted.push(card)
+        }
+    })
+  })
+  return sorted
 }
 
 module.exports = {
-  getSetInfo, 
-  updateCardStats
+  getSetInfo,
+  sortResult
 }
