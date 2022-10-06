@@ -122,7 +122,7 @@ module.exports.edit_card_post = (req, res) => {
       res.redirect(`/${subcategory}/${title}`)
     })
 }
-module.exports.feedback_post = async (req, res) => {
+module.exports.correct_post = async (req, res) => {
   const cardId = req.body.cardId
   const userId = req.body.userId
   const cardIdArr = []
@@ -140,6 +140,25 @@ module.exports.feedback_post = async (req, res) => {
     })
   } else {
     user.cardStats.push({ cardId, consecutiveCorrectAnswers: 1, lastViewed: Date.now() })
+  }
+  await user.save()
+}
+module.exports.incorrect_post = async (req, res) => {
+  const cardId = req.body.cardId
+  const userId = req.body.userId
+  const cardIdArr = []
+  const user = await User.findById(userId)
+
+  user.cardStats.forEach(stat => {
+    cardIdArr.push(stat.cardId)
+  })
+  if (cardIdArr.includes(cardId)) {
+    user.cardStats.forEach(stat => {
+      if (cardId == stat.cardId) {
+        stat.consecutiveCorrectAnswers = 0
+        stat.lastViewed = Date.now()
+      } 
+    })
   }
   await user.save()
 }

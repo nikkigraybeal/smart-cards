@@ -14,6 +14,7 @@ router.get('/edit-set', requireAuth, cardController.edit_set_get)
 router.post('/edit-set', cardController.edit_set_post)
 router.get('/edit-card', requireAuth, cardController.edit_card_get)
 router.post('/edit-card', cardController.edit_card_post)
-router.post('/feedback', cardController.feedback_post)
+router.post('/correct', cardController.correct_post)
+router.post('/incorrect', cardController.incorrect_post)
 
 module.exports = router
