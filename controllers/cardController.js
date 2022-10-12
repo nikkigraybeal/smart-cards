@@ -60,8 +60,9 @@ module.exports.set_get = async (req, res) => {
 module.exports.set_delete = (req, res) => {
   const subcategory = req.params.subcategory 
   const title = req.params.title
+  const author = req.params.author
 
-  Card.deleteMany({subcategory, title})
+  Card.deleteMany({author, subcategory, title})
     .then((result) => {
       res.json({ redirect: '/home' })
     })

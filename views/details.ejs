@@ -53,7 +53,7 @@
     
     const deleteSet = document.querySelector('.delete-set')
     const removeSet = () => {
-      const endpoint = `/${setInfoSubcategory}/${setInfoTitle}`
+      const endpoint = `/${setInfoAuthor}/${setInfoSubcategory}/${setInfoTitle}`
 
       fetch(endpoint, {
         method: 'DELETE'
