@@ -46,12 +46,34 @@ header h1{
 header h2{
   text-align: center;
 }
-input{
+form{
+  max-width: 400px;
+  margin: 0 auto;
+}
+form h2 {
+  text-align: center;
+}
+label{
+  display: block;
+  margin-top: 24px;
+}
+input {
   border: 1px solid #777;
   border-radius: 4px;
   margin: 10px 0;
   padding: 8px;
+  display: block;
+  width: 100%;
   
+}
+textarea {
+  border: 1px solid #777;
+  border-radius: 4px;
+  margin: 10px 0;
+  padding: 8px;
+  min-height: 100px;
+  display: block;
+  width: 100%;
 }
 button{
   margin-top: 20px;
@@ -146,18 +168,6 @@ footer{
   cursor: pointer;
   color: indigo;
 }
-.create-set-container form{
-  max-width: 400px;
-  margin: 0 auto;
-}
-.create-set-container input{
-  display: block;
-  width: 100%;
-}
-.create-set-container label{
-  display: block;
-  margin-top: 24px;
-}
 .public-label{
   position: relative;
   left: 25px;
@@ -182,7 +192,7 @@ footer{
 .added-links{
   border: 1px solid black;
   border-radius: 4px;
-  height: 75px;
+  height: 100px;
   overflow: scroll;
 }
 .added-links p{
@@ -190,9 +200,7 @@ footer{
   margin-top: 5px;
   color: gray;
 }
-.signup-container input{
-  margin: 20px 0;
-}
+
 .email.error, .password.error {
   color: red;
 }

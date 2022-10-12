@@ -31,12 +31,14 @@
     const setInfoSubcategory = document.querySelector(".setInfo-subcategory").innerText
     const setInfoTitle = document.querySelector(".setInfo-title").innerText
     const setInfoPublic = document.querySelector(".setInfo-public").innerText === "public" ? "on" : "" 
+    const setInfoAuthor = document.querySelector('.setInfo-author').innerText
 
     const setInfo = {
       subject: setInfoSubject,
       subcategory: setInfoSubcategory,
       title: setInfoTitle,
-      public: setInfoPublic
+      public: setInfoPublic,
+      author: setInfoAuthor
     }
 
     sessionStorage.setItem("storedSetInfo", JSON.stringify(setInfo))

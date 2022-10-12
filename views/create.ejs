@@ -38,10 +38,10 @@
       
       <div class="card-input">
         <label for="question">Question:</label>
-        <input type="text" id="question" name="question" required>
+        <textarea id="question" name="question" required></textarea>
   
         <label for="answer">Answer:</label>
-        <input type="text" id="answer" name="answer" required>
+        <textarea id="answer" name="answer" required></textarea>
   
         <label for="link">Add Link:</label>
         <input type="text" id="link">
@@ -117,6 +117,7 @@
       setInput.classList.add('hide')
     })
 
+    // display set info from sessionStorage if it exists
     if (sessionStorage.storedSetInfo) {
       const storedSetInfo = JSON.parse(sessionStorage.storedSetInfo)
       html = `

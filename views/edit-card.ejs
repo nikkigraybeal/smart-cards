@@ -12,10 +12,10 @@
       
       <div class="card-input">
         <label for="question">Question:</label>
-        <input type="text" id="question" name="question" required>
+        <textarea id="question" name="question" required></textarea>
   
         <label for="answer">Answer:</label>
-        <input type="text" id="answer" name="answer" required>
+        <textarea id="answer" name="answer" required></textarea>
   
         <label for="link">Add Link:</label>
         <input type="text" id="link">
@@ -24,11 +24,14 @@
           <p>Added links will appear here.</p>
         </div>
 
-        <div class="">
-          <input type="text" id="cardId" name="cardId"></input>
-          <input class="hidden-links-input" name="links"></input>
-          <input type="text" id="subcategory" name="subcategory"></input>
-          <input type="text" id="title" name="title"></input>
+        <div class="hide">
+          <input type="text" id="cardId" name="cardId">cardId</input>
+          <input class="hidden-links-input" name="links">links</input>
+          <input type="text" id="subcategory" name="subcategory">subcat</input>
+          <input type="text" id="title" name="title">title</input>
+          <input type="text" id="author" name="author">author</input>
+          <input type="text" id="userId" name="userId" value="<%= user._id %>">userId</input>
+          
 
         </div>
         
@@ -52,6 +55,8 @@
     document.forms['card-update-form']['cardId'].value = storedCardInfo.cardId
     document.forms['card-update-form']['subcategory'].value = storedSetInfo.subcategory
     document.forms['card-update-form']['title'].value = storedSetInfo.title
+    document.forms['card-update-form']['author'].value = storedSetInfo.author
+    
 
     // ADD LINKS TO LINK DISPLAY DIV ON "ADD"
     //elements

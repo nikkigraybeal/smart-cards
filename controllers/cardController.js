@@ -107,8 +107,11 @@ module.exports.edit_card_get = (req, res) => {
   res.render('edit-card', { title: 'Edit Card Info' })
 }
 module.exports.edit_card_post = (req, res) => {
+  const userId = req.body.userId
+  const author = req.body.author
   const subcategory = req.body.subcategory
   const title = req.body.title
+
   const cardId = mongoose.Types.ObjectId(req.body.cardId)
   Card.updateOne({ _id: cardId }, 
                   { $set: {
@@ -119,7 +122,7 @@ module.exports.edit_card_post = (req, res) => {
                     
                    })
     .then(result => {
-      res.redirect(`/${subcategory}/${title}`)
+      res.redirect(`/${userId}/${author}/${subcategory}/${title}`)
     })
 }
 module.exports.correct_post = async (req, res) => {
