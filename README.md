@@ -11,4 +11,16 @@ Login and signup pages allow new and returning users to create flashcard sets an
 
 Where to view and try it: coming soon...? Next up, learning to deploy a node app! In the meantime, grab it off of Github and try it out on your own machine. 
 
+Next steps: As stated above, I plan to get this deployed and hosted asap. 
+This is also very much a first draft version. I chose to keep my models simple because I am new to backend programming. I created only a Card model and a User model. This has proved problematic and resulted in some overly-complicated code in the controllers and views. I hope to reorganize my approach beginning with adding a Set model which holds references to the cards belonging to that specific set. Fetching sets of cards from the database will be much easier and less costly than searching through every card in order to assemble each set as they are requested. This will create a cascade of necessary changes in the views and routes but will ultimately reduce the conmplexity and verbosity of the code as it stands. 
+
+What I learned and what I still need to learn: 
+
+I definitely got my feet wet with backend concepts such as templating engines, routing, MVC and Mongoose/MongoDb. I understand the basics of HTTP requests, how to pass data as a url and use it in a controller to query a database. I also know a bit about passing data returned from a query to the rest of the app. I also gained a much clearer understanding of what the function of a model is and, by extension, the functionality that an ORM provides. 
+
+I am still struggling to understand the best methods for accessing database objects in both the backend and frontend code. At times I wanted to reference an object from the database in my frontend JS but only knew how to pass the data to EJS, place it in a hidden HTML tag and then use querySelector to access it in my JS. Surely there is a better way!?
+
+I also need to learn how to created a nested model in order to make the changes to the code that I mentioned above in the "next steps" section. 
+
+
 
