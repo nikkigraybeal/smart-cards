@@ -9,7 +9,7 @@ Edit views allow users to edit the set information for an entire set of cards or
 A create view also allows users to create new sets and cards and indicate if they would like to make the set publicly available. Publicly available sets can be viewed by anyone who uses the app but only logged in users may create new sets and edit thier own sets. 
 Login and signup pages allow new and returning users to create flashcard sets and track their learning.
 
-Where to view and try it: coming soon...? Next up, learning to deploy a node app! In the meantime, grab it off of Github and try it out on your own machine. 
+Where to view and try it: http://143.110.151.89/ 
 
 Next steps: As stated above, I plan to get this deployed and hosted asap. 
 This is also very much a first draft version. I chose to keep my models simple because I am new to backend programming. I created only a Card model and a User model. This has proved problematic and resulted in some overly-complicated code in the controllers and views. I hope to reorganize my approach beginning with adding a Set model which holds references to the cards belonging to that specific set. Fetching sets of cards from the database will be much easier and less costly than searching through every card in order to assemble each set as they are requested. This will create a cascade of necessary changes in the views and routes but will ultimately reduce the conmplexity and verbosity of the code as it stands. 
