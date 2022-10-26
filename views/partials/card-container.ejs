@@ -78,10 +78,7 @@
       saveCardInfo(cardFronts[index], cardBacks[index])
      }
     }
-
-
     signupMessage.innerHTML = ''
-    
   })
 
     flip.addEventListener('click', () => {
@@ -111,6 +108,8 @@
     })
     .then((response) => response.json())
     .catch(err => console.log(err))
+
+    goNextButton.click()
   }
   const handleIncorrectClick = () => {
     const uId = userId.innerHTML
@@ -127,6 +126,7 @@
     })
     .then((response) => response.json())
     .catch(err => console.log(err))
+    goNextButton.click()
   }
   
   const handleDisplaySignUpMessage = () => {

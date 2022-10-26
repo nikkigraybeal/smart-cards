@@ -50,11 +50,11 @@ module.exports.set_get = async (req, res) => {
   console.log("userID: ", userId)
 
   let result = await Card.find({ subcategory, title, author })
-    
-  result  = await utils.sortResult(result, userId)
+  
+  if (!(userId === "0000")) {
+    result  = await utils.sortResult(result, userId)
+  }
   res.render('details', { title: 'Details', result })
-    
-   
 }
 
 module.exports.set_delete = (req, res) => {
