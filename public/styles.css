@@ -150,23 +150,24 @@ footer{
 }
 .feedback-container{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   height: 30px;
 }
 .correct{
   font-size: 1.25em;
-  width: 50%;
+  width: 25%;
   height: 100%;
   border-right: 2px solid black;
+  
 }
 .incorrect{
   font-size: 1.25em;
-  width: 50%;
+  width: 25%;
   height: 100%;
 }
 .correct:hover, .incorrect:hover{
   cursor: pointer;
-  color: indigo;
+  color: rgb(66, 204, 255);
 }
 .public-label{
   position: relative;
@@ -200,7 +201,14 @@ footer{
   margin-top: 5px;
   color: gray;
 }
-
+.link-trash{
+  position: relative;
+  top: 5px;
+}
+.link-trash:hover{
+  cursor: pointer;
+  color: grey;
+}
 .email.error, .password.error {
   color: red;
 }
